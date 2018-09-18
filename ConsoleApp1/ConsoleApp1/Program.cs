@@ -10,6 +10,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            Mapa Mapa = new Mapa();
+            Mapa.GenerateMap();
             
         }
     }
