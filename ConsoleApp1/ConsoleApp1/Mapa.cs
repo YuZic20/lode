@@ -10,13 +10,19 @@ namespace ConsoleApp1
     {
         private int MapSize = 10;
 		private List<Pozice> Map = new List<Pozice>();
-		private List<int> MapState = new List<int>(); //0 = voda 1 =potopena lod 2= lod 3 strela 4 strefena lod
+		private List<int> MapState = new List<int>(); //0 = voda 1 =potopena lod 2= lod 3 strela 4 trefena lod 5 = invalid spot
 		int MapMaxIndex = 0;
 		private string Voda = "o";
 		private string PotopenaLod = "X";
 		private string Lod = "H";
 		private string Strela = "X";
 		private string TrefenaLod = "X";
+		private Pozice Kurzor = new Pozice { PozX = 1, PozY = 1 };
+		private int KurzorInt = 0;
+		int help = 0; 
+		//MapState[help] = 4;
+
+
 
 		public void GenerateMap()
 		{	
@@ -33,13 +39,13 @@ namespace ConsoleApp1
                 }
             }
 			MapMaxIndex = Map.Count;
-			/*int help = (10-1)+((4-1)*MapSize); //x-1 +y-1*mapsize
-			MapState[help] = 4;*/
+			
 		}
 
 
 		public void PrintMap()
 		{
+			KurzorInt = (Kurzor.PozX - 1) + ((Kurzor.PozY - 1) * MapSize);
 			int TableHelper = 1;
 			for (int i = 1; i <= MapSize; i++) // vypsání čísel top
 			{
@@ -48,6 +54,10 @@ namespace ConsoleApp1
 			Console.WriteLine();
 			for (int i = 1; i <= MapMaxIndex; i++)
 			{
+				if (KurzorInt == i-1)
+				{
+					Console.BackgroundColor = ConsoleColor.White;
+				}
 				
 				if (i % MapSize == 0 || i == 0)
 				{
@@ -117,6 +127,40 @@ namespace ConsoleApp1
 						Console.ResetColor();
 						Console.Write(" ");
 					}
+				}
+			}
+			Console.WriteLine("PozX= " + Kurzor.PozX);
+			Console.WriteLine("PozY= " + Kurzor.PozY);
+		}
+		public void MapKurzor(string Input)
+		{
+			if (Input == "w")
+			{
+				if (Kurzor.PozY > 1)
+				{
+					Kurzor.PozY--;
+				}
+				
+			}
+			else if (Input == "d")
+			{
+				if (Kurzor.PozX < MapSize)
+				{
+					Kurzor.PozX++;
+				}
+			}
+			else if (Input == "s")
+			{
+				if (Kurzor.PozY < MapSize)
+				{
+					Kurzor.PozY++;
+				}
+			}
+			else if (Input == "a")
+			{
+				if (Kurzor.PozX > 1)
+				{
+					Kurzor.PozX--;
 				}
 			}
 		}

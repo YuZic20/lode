@@ -10,10 +10,24 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Mapa Mapa = new Mapa();
+			ConsoleKeyInfo input;
+			string inputToKursor;
+			bool game = true;
+
+			 Mapa Mapa = new Mapa();
             Mapa.GenerateMap();
-			Mapa.PrintMap();
-            
-        }
+			
+
+			while (game)
+			{
+				Mapa.PrintMap();
+				input = Console.ReadKey();
+				inputToKursor = input.KeyChar.ToString();
+				Mapa.MapKurzor(inputToKursor);
+				Console.Clear();
+
+			}
+
+		}
     }
 }
