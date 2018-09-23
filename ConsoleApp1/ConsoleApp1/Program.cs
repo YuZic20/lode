@@ -12,6 +12,7 @@ namespace ConsoleApp1
         {
             Mapa Mapa = new Mapa();
             Mapa.GenerateMap();
+			Mapa.PrintMap();
             
         }
     }
