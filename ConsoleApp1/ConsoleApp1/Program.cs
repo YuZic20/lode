@@ -10,11 +10,15 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-			ConsoleKeyInfo input;
+
+            Lode Ships = new Lode();
+            Ships.GeneratePonorka();
+            Ships.GenerateTorpedoborec();
+            ConsoleKeyInfo input;
 			string inputToKursor;
 			bool game = true;
 
-			 Mapa Mapa = new Mapa();
+			Mapa Mapa = new Mapa();
             Mapa.GenerateMap();
 			
 
@@ -24,7 +28,8 @@ namespace ConsoleApp1
 				input = Console.ReadKey();
 				inputToKursor = input.KeyChar.ToString();
 				Mapa.MapKurzor(inputToKursor);
-				Console.Clear();
+                Mapa.PlaceShip(Ships.GetShip(0));
+				//Console.Clear();
 
 			}
 

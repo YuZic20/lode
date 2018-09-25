@@ -8,96 +8,103 @@ namespace ConsoleApp1
 {
     class Lode
     {
+        List<Lod> TemplateShips = new List<Lod>();
         
-        private string ShipType;
-        private Pozice pivot;
-        private List<Pozice> LodStav1;
-        private List<Pozice> LodStav2;
-        private List<Pozice> LodStav3;
-        private List<Pozice> LodStav4;
-		public List<Pozice> ShipRotationState;
-		private int RotationState; // 1 = nahoru 2 = vpravo 3 = dolu 4 = vlevo
-		/*
-		enum RotationState
-		{
-			Nahoru,
-			Vpravo,
-			Dolu,
-			Vlevo
-		}
-		*/
-		public Lode (string ShipTypeI, Pozice pivotI, List<Pozice> LodStav1I, List<Pozice> LodStav2I, List<Pozice> LodStav3I, List<Pozice> LodStav4I)
+
+
+        public Lode()
+        {/*
+            public Lod ponorka = new Lod();
+            public Lod torpedoborec = new Lod();
+            public Lod kriznik = new Lod();
+            public Lod bitevni = new Lod();
+            public Lod letadlova = new Lod();*/
+        }
+
+
+        public Lod GetShip (int Type)
         {
-			ShipType = ShipTypeI;
-			pivot = pivotI;
-			LodStav1 = LodStav1I;
-			LodStav2 = LodStav2I;
-			LodStav3 = LodStav3I;
-			LodStav4 = LodStav4I;
-			RotationState = 1;
+            return TemplateShips[Type];
+        }
+        public void GeneratePonorka()
+        {
+            Pozice pivot = new Pozice()
+            {
+                PozX = 0,
+                PozY = 0
+            };
 
-			//generace lode 
+            List<Pozice> LodObsah = new List<Pozice>();
+            LodObsah.Add(new Pozice
+            {
+                PozX = 0,
+                PozY = 0
+            });
 
-			void ShipRotate(string rotate) //rotace lodi
-			{
-				if (rotate == "R")
-				{
-					if (RotationState == 4)
-					{
-						RotationState = 1;
-					}
-					else
-					{
-						RotationState++;
-					}
-				}
-				else if (rotate == "L")
-				{
-					if (RotationState == 1)
-					{
-						RotationState = 4;
-					}
-					else
-					{
-						RotationState--;
-					}
-				if (RotationState == 1)
-				{
-					ShipRotationState = LodStav1;
-				}
-				else if (RotationState == 2)
-				{
-					ShipRotationState = LodStav2;
-				}
-				else if (RotationState == 3)
-				{
-					ShipRotationState = LodStav3;
-				}
-				else if (RotationState == 4)
-				{
-					ShipRotationState = LodStav4;
-				}
-				}
-			}
-			
+            Lod lod = new Lod("Ponorka", pivot, LodObsah, LodObsah, LodObsah, LodObsah);
 
+            TemplateShips.Add(lod);
+        }
 
-			/*
-			Pozice pivot = new Pozice()
-			{
-				PozX = 0,
-				PozY = 0
-			};
+        public void GenerateTorpedoborec()
+        {
+            Pozice pivot = new Pozice()
+            {
+                PozX = 1,
+                PozY = 1
+            };
 
-			List<Pozice> LodObsah = new List<Pozice>();
-			LodObsah.Add(new Pozice
-			{
-				PozX = 0,
-				PozY = 0
-			});
-			*/
-		}
+            List<Pozice> LodObsah1 = new List<Pozice>();
+            LodObsah1.Add(new Pozice
+            {
+                PozX = 1,
+                PozY = 0
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = 1,
+                PozY = 1
+            });
 
+            List<Pozice> LodObsah2 = new List<Pozice>();
+            LodObsah2.Add(new Pozice
+            {
+                PozX = 1,
+                PozY = 1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = 2,
+                PozY = 1
+            });
 
+            List<Pozice> LodObsah3 = new List<Pozice>();
+            LodObsah3.Add(new Pozice
+            {
+                PozX = 1,
+                PozY = 1
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = 1,
+                PozY = 2
+            });
+
+            List<Pozice> LodObsah4 = new List<Pozice>();
+            LodObsah4.Add(new Pozice
+            {
+                PozX = 0,
+                PozY = 1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = 1,
+                PozY = 1
+            });
+
+            Lod lod = new Lod("Torpedoborec", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);
+
+            TemplateShips.Add(lod);
+        }
     }
 }

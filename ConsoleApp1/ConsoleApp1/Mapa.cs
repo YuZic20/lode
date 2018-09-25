@@ -8,9 +8,10 @@ namespace ConsoleApp1
 {
     class Mapa
     {
+        Lode Ships = new Lode();
         private int MapSize = 10;
 		private List<Pozice> Map = new List<Pozice>();
-		private List<int> MapState = new List<int>(); //0 = voda 1 =potopena lod 2= lod 3 strela 4 trefena lod 5 = invalid spot
+		private List<int> MapState = new List<int>(); //0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
 		int MapMaxIndex = 0;
 		private string Voda = "o";
 		private string PotopenaLod = "X";
@@ -164,6 +165,22 @@ namespace ConsoleApp1
 				}
 			}
 		}
+        public void PlaceShip(Lod Input)
+        {
+            Console.WriteLine("pokládáš: " + Input.ShipType);
 
-	}
+            int ShipMaxIndex = Input.ShipTiles.Count;
+            Pozice ShipTile = new Pozice();
+            int ShipInt;
+            for (int i = 0; i < ShipMaxIndex; i++)
+            {
+                ShipTile = Input.ShipTiles[i];
+                ShipInt = (ShipTile.PozX + Kurzor.PozX - 1) + ((ShipTile.PozY + Kurzor.PozY - 1) * MapSize);
+                MapState[ShipInt] = 2;
+            }
+            
+
+        }
+
+    }
 }
