@@ -28,8 +28,8 @@ namespace ConsoleApp1
 				input = Console.ReadKey();
 				inputToKursor = input.KeyChar.ToString();
 				Mapa.MapKurzor(inputToKursor);
-                Mapa.PlaceShip(Ships.GetShip(0));
-				//Console.Clear();
+                Mapa.PlaceShip(Ships.GetShip(1));
+				Console.Clear();
 
 			}
 

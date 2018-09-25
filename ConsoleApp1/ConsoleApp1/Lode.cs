@@ -50,8 +50,8 @@ namespace ConsoleApp1
         {
             Pozice pivot = new Pozice()
             {
-                PozX = 1,
-                PozY = 1
+                PozX = 2,
+                PozY = 2
             };
 
             List<Pozice> LodObsah1 = new List<Pozice>();

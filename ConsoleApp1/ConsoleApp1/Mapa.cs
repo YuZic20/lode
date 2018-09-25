@@ -79,11 +79,13 @@ namespace ConsoleApp1
 					}
 					else if (MapState[i - 1] == 2)
 					{
-						Console.Write(Lod + " ");
-					}
+                        Console.ResetColor();
+                        Console.Write(Lod + " ");
+                        					}
 					else if (MapState[i - 1] == 3)
 					{
-						Console.Write(Strela + " ");
+                        Console.ResetColor();
+                        Console.Write(Strela + " ");
 					}
 					else if (MapState[i - 1] == 4)
 					{
@@ -115,11 +117,13 @@ namespace ConsoleApp1
 					}
 					else if (MapState[i - 1] == 2)
 					{
-						Console.Write(Lod + " ");
+                        Console.ResetColor();
+                        Console.Write(Lod + " ");
 					}
 					else if (MapState[i - 1] == 3)
 					{
-						Console.Write(Strela + " ");
+                        Console.ResetColor();
+                        Console.Write(Strela + " ");
 					}
 					else if (MapState[i - 1] == 4)
 					{
@@ -168,15 +172,25 @@ namespace ConsoleApp1
         public void PlaceShip(Lod Input)
         {
             Console.WriteLine("pokládáš: " + Input.ShipType);
-
+            Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
             Pozice ShipTile = new Pozice();
             int ShipInt;
             for (int i = 0; i < ShipMaxIndex; i++)
             {
                 ShipTile = Input.ShipTiles[i];
-                ShipInt = (ShipTile.PozX + Kurzor.PozX - 1) + ((ShipTile.PozY + Kurzor.PozY - 1) * MapSize);
-                MapState[ShipInt] = 2;
+                ShipInt = (ShipTile.PozX + Kurzor.PozX-2) + ((ShipTile.PozY + Kurzor.PozY-1) * MapSize);
+
+                if (ShipInt < MapMaxIndex)
+                {
+                    MapState[ShipInt] = 2;
+                }
+                else
+                {
+                    //not able place!!!
+                }
+                
+                
             }
             
 

@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
         
         public string ShipType;
-        private Pozice pivot;
+        public Pozice pivot;
         private List<Pozice> LodStav1;
         private List<Pozice> LodStav2;
         private List<Pozice> LodStav3;
