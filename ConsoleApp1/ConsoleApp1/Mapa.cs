@@ -12,7 +12,8 @@ namespace ConsoleApp1
         private int MapSize = 10;
 		private List<Pozice> Map = new List<Pozice>();
 		private List<int> MapState = new List<int>(); //0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
-		int MapMaxIndex = 0;
+        private List<int> MapStateReal = new List<int>();
+        int MapMaxIndex = 0;
 		private string Voda = "o";
 		private string PotopenaLod = "X";
 		private string Lod = "H";
@@ -40,13 +41,15 @@ namespace ConsoleApp1
                 }
             }
 			MapMaxIndex = Map.Count;
+            MapStateReal = MapState;
 			
 		}
 
 
 		public void PrintMap()
 		{
-			KurzorInt = (Kurzor.PozX - 1) + ((Kurzor.PozY - 1) * MapSize);
+            
+            KurzorInt = (Kurzor.PozX - 1) + ((Kurzor.PozY - 1) * MapSize);
 			int TableHelper = 1;
 			for (int i = 1; i <= MapSize; i++) // vypsání čísel top
 			{
@@ -136,7 +139,8 @@ namespace ConsoleApp1
 			}
 			Console.WriteLine("PozX= " + Kurzor.PozX);
 			Console.WriteLine("PozY= " + Kurzor.PozY);
-		}
+            MapState = MapStateReal.ToList();
+        }
 		public void MapKurzor(string Input)
 		{
 			if (Input == "w")
@@ -167,7 +171,11 @@ namespace ConsoleApp1
 				{
 					Kurzor.PozX--;
 				}
-			}
+            }
+            else
+            {
+                //pošli data jinam (rotace atd)
+            }
 		}
         public void PlaceShip(Lod Input)
         {
