@@ -41,7 +41,7 @@ namespace ConsoleApp1
 				inputToKursor = input.KeyChar.ToString();
 				Mapa.MapKurzor(inputToKursor);
                 Mapa.PlaceShip(Ships.GetShip(1));
-				Console.Clear();
+				//Console.Clear();
 
 			}
 

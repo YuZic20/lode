@@ -30,15 +30,15 @@ namespace ConsoleApp1
         {
             Pozice pivot = new Pozice()
             {
-                PozX = 0,
-                PozY = 0
+                PozX = 1,
+                PozY = 1
             };
 
             List<Pozice> LodObsah = new List<Pozice>();
             LodObsah.Add(new Pozice
             {
-                PozX = 0,
-                PozY = 0
+                PozX = -1,
+                PozY = -1
             });
 
             Lod lod = new Lod("Ponorka", pivot, LodObsah, LodObsah, LodObsah, LodObsah);
