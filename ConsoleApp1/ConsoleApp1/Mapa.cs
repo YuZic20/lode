@@ -9,7 +9,7 @@ namespace ConsoleApp1
     class Mapa
     {
         Lode Ships = new Lode();
-        private int MapSize = 10;
+        private int MapSize = 8;
 		private List<Pozice> Map = new List<Pozice>();
 		private List<int> MapState = new List<int>(); //0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
         private List<int> MapStateReal = new List<int>();
@@ -21,7 +21,8 @@ namespace ConsoleApp1
 		private string TrefenaLod = "X";
 		private Pozice Kurzor = new Pozice { PozX = 1, PozY = 1 };
 		private int KurzorInt = 0;
-		int help = 0; 
+        private RotationState Rotate = 0;
+        int help = 0; 
 		//MapState[help] = 4;
 
 
@@ -140,6 +141,7 @@ namespace ConsoleApp1
 			Console.WriteLine("PozX= " + Kurzor.PozX);
 			Console.WriteLine("PozY= " + Kurzor.PozY);
             MapState = MapStateReal.ToList();
+            Rotate = RotationState.Unset;
         }
 		public void MapKurzor(string Input)
 		{
@@ -172,13 +174,21 @@ namespace ConsoleApp1
 					Kurzor.PozX--;
 				}
             }
-            else
+            else if ( Input == "e")
             {
-                //pošli data jinam (rotace atd)
+                Rotate = RotationState.Doprava;
             }
-		}
+            else if (Input == "q")
+            {
+                Rotate = RotationState.Doleva;
+            }
+        }
         public void PlaceShip(Lod Input)
         {
+            if (Rotate != RotationState.Unset)
+            {
+                Input.ShipRotate(Rotate);
+            }
             Console.WriteLine("pokládáš: " + Input.ShipType);
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
@@ -187,9 +197,9 @@ namespace ConsoleApp1
             for (int i = 0; i < ShipMaxIndex; i++)
             {
                 ShipTile = Input.ShipTiles[i];
-                ShipInt = (ShipTile.PozX + Kurzor.PozX-2) + ((ShipTile.PozY + Kurzor.PozY-1) * MapSize);
+                ShipInt = (ShipTile.PozX + Kurzor.PozX) + ((ShipTile.PozY + Kurzor.PozY) * MapSize);
 
-                if (ShipInt < MapMaxIndex)
+                if (ShipInt < MapMaxIndex && ShipInt > 0)
                 {
                     MapState[ShipInt] = 2;
                 }

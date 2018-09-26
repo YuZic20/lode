@@ -6,12 +6,24 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    enum RotationState
+    {
+        Nahoru,
+        Doprava,
+        Dolu,
+        Doleva,
+        Unset
+    }
     class Program
     {
         static void Main(string[] args)
         {
 
-            Lode Ships = new Lode();
+            
+
+
+
+        Lode Ships = new Lode();
             Ships.GeneratePonorka();
             Ships.GenerateTorpedoborec();
             ConsoleKeyInfo input;
