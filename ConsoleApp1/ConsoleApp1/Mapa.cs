@@ -9,7 +9,7 @@ namespace ConsoleApp1
     class Mapa
     {
         Lode Ships = new Lode();
-        private int MapSize = 8;
+        private int MapSize = 10;
 		private List<Pozice> Map = new List<Pozice>();
 		private List<int> MapState = new List<int>(); //0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
         private List<int> MapStateReal = new List<int>();
@@ -24,11 +24,14 @@ namespace ConsoleApp1
         private RotationState Rotate = 0;
         private int help = 0;
         private string LastInput;
-		//MapState[help] = 4;
+        private bool AbleToPlace = false;
+        private bool Place = false;
+
+        //MapState[help] = 4;
 
 
 
-		public void GenerateMap()
+        public void GenerateMap()
 		{	
 			for (int a = 1; a <= MapSize;a++)
                 {
@@ -52,7 +55,8 @@ namespace ConsoleApp1
 		{
             
             KurzorInt = (Kurzor.PozX - 1) + ((Kurzor.PozY - 1) * MapSize);
-			int TableHelper = 1;
+            Place = false;
+            int TableHelper = 1;
 			for (int i = 1; i <= MapSize; i++) // vypsání čísel top
 			{
 				Console.Write((i)+ " ");
@@ -184,6 +188,10 @@ namespace ConsoleApp1
             {
                 Rotate = RotationState.Doleva;
             }
+            else if (Input == " ")
+            {
+                Place = true;
+            }
         }
         public void PlaceShip(Lod Input)
         {
@@ -196,6 +204,7 @@ namespace ConsoleApp1
                 Input.ShipRotate(Rotate);
             }
             Console.WriteLine("pokládáš: " + Input.ShipType);
+            //List<Pozice> ValidShip = new List<Pozice>();
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
             Pozice ShipTile = new Pozice();
@@ -208,26 +217,39 @@ namespace ConsoleApp1
 
                 if (ShipTile.PozX + Kurzor.PozX >= 0 && ShipTile.PozX + Kurzor.PozX <= MapSize-1)
                 {
-
+              
                 }
                 else
                 {
                     Console.WriteLine("not able place!!!3");
+                    AbleToPlace = false;
                 }
                 
 
                     if (ShipInt < MapMaxIndex && ShipInt >= 0 )/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
                 {
                     MapState[ShipInt] = 2;
+                    
                 }
                 else
                 {
                     //not able place!!!
                     Console.WriteLine("not able place!!!2");
+                    AbleToPlace = false;
                 }
+            if (AbleToPlace == true && Place == true)
+                {
+                    Console.WriteLine("Placing");
+                    MapStateReal = MapState.ToList();
+                    AbleToPlace = false;
+
+                    /*for (int i = 0; i < ShipMaxIndex; i++)
+                    {
+
+                     */                          
+                 }
                 
-                
-            }
+              }
             
 
         }
