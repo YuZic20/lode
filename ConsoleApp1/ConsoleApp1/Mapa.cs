@@ -22,7 +22,8 @@ namespace ConsoleApp1
 		private Pozice Kurzor = new Pozice { PozX = 1, PozY = 1 };
 		private int KurzorInt = 0;
         private RotationState Rotate = 0;
-        private int help = 0; 
+        private int help = 0;
+        private string LastInput;
 		//MapState[help] = 4;
 
 
@@ -145,6 +146,7 @@ namespace ConsoleApp1
         }
 		public void MapKurzor(string Input)
 		{
+            LastInput = Input;
 			if (Input == "w")
 			{
 				if (Kurzor.PozY > 1)
@@ -185,6 +187,10 @@ namespace ConsoleApp1
         }
         public void PlaceShip(Lod Input)
         {
+
+            
+
+
             if (Rotate != RotationState.Unset)
             {
                 Input.ShipRotate(Rotate);
@@ -194,22 +200,23 @@ namespace ConsoleApp1
             int ShipMaxIndex = Input.ShipTiles.Count;
             Pozice ShipTile = new Pozice();
             int ShipInt;
-            int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);
+            int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);                       
             for (int i = 0; i < ShipMaxIndex; i++)
             {
                 ShipTile = Input.ShipTiles[i];
                 ShipInt = (ShipTile.PozX + Kurzor.PozX) + ((ShipTile.PozY + Kurzor.PozY) * MapSize);
-                int b = 1;
-                while (true)
-                {
-                    if (MapSize * (b-1) <= KurzorInt && MapSize * b >= KurzorInt)
-                    {
-                        break;
-                    }
-                    b++;
-                }
 
-                    if (ShipInt < MapMaxIndex && ShipInt > 0 && MapSize * (b - 1) <= KurzorInt && MapSize * b >= KurzorInt)/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
+                if (ShipTile.PozX + Kurzor.PozX >= 0)
+                {
+
+                }
+                else
+                {
+                    Console.WriteLine("not able place!!!3");
+                }
+                
+
+                    if (ShipInt < MapMaxIndex && ShipInt > 0 )/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
                 {
                     MapState[ShipInt] = 2;
                 }
