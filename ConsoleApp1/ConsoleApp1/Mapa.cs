@@ -206,7 +206,7 @@ namespace ConsoleApp1
                 ShipTile = Input.ShipTiles[i];
                 ShipInt = (ShipTile.PozX + Kurzor.PozX) + ((ShipTile.PozY + Kurzor.PozY) * MapSize);
 
-                if (ShipTile.PozX + Kurzor.PozX >= 0)
+                if (ShipTile.PozX + Kurzor.PozX >= 0 && ShipTile.PozX + Kurzor.PozX <= MapSize-1)
                 {
 
                 }
