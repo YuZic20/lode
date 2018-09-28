@@ -229,10 +229,11 @@ namespace ConsoleApp1
                     if (ShipInt < MapMaxIndex && ShipInt >= 0 )/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
                 {
                     MapState[ShipInt] = 2;
-                    
+                    //AbleToPlace = true;
+
                 }
                 else
-                {
+                {  
                     //not able place!!!
                     Console.WriteLine("not able place!!!2");
                     AbleToPlace = false;
