@@ -55,7 +55,6 @@ namespace ConsoleApp1
 		{
             
             KurzorInt = (Kurzor.PozX - 1) + ((Kurzor.PozY - 1) * MapSize);
-            Place = false;
             int TableHelper = 1;
 			for (int i = 1; i <= MapSize; i++) // vypsání čísel top
 			{
@@ -103,8 +102,16 @@ namespace ConsoleApp1
 						Console.ResetColor();
 						Console.Write(" ");
 					}
+                    else if (MapState[i - 1] == 5)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(Voda);
+                        Console.ResetColor();
+                        Console.Write(" ");
 
-				Console.WriteLine(" " + (TableHelper));
+                    }
+
+                    Console.WriteLine(" " + (TableHelper));
 				TableHelper++;
 				}
 					
@@ -141,12 +148,21 @@ namespace ConsoleApp1
 						Console.ResetColor();
 						Console.Write(" ");
 					}
-				}
+                    else if (MapState[i - 1] == 5)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(Voda);
+                        Console.ResetColor();
+                        Console.Write(" ");
+
+                    }
+                }
 			}
 			Console.WriteLine("PozX= " + Kurzor.PozX);
 			Console.WriteLine("PozY= " + Kurzor.PozY);
             MapState = MapStateReal.ToList();
             Rotate = RotationState.Unset;
+            Place = false;
         }
 		public void MapKurzor(string Input)
 		{
@@ -204,16 +220,39 @@ namespace ConsoleApp1
                 Input.ShipRotate(Rotate);
             }
             Console.WriteLine("pokládáš: " + Input.ShipType);
-            //List<Pozice> ValidShip = new List<Pozice>();
+            List<Pozice> ValidShip = new List<Pozice>();
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
+            int BadCount = 0;
             Pozice ShipTile = new Pozice();
             int ShipInt;
-            int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);                       
-            for (int i = 0; i < ShipMaxIndex; i++)
+            int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);
+            AbleToPlace = true;
+            for (int i = 0; i < ShipMaxIndex ; i++)
             {
                 ShipTile = Input.ShipTiles[i];
                 ShipInt = (ShipTile.PozX + Kurzor.PozX) + ((ShipTile.PozY + Kurzor.PozY) * MapSize);
+
+                ValidShip.Add(new Pozice
+                {
+                    PozX = ShipTile.PozX + Kurzor.PozX + 1,
+                    PozY = ShipTile.PozY + Kurzor.PozY
+                });
+                ValidShip.Add(new Pozice
+                {
+                    PozX = ShipTile.PozX + Kurzor.PozX - 1,
+                    PozY = ShipTile.PozY + Kurzor.PozY 
+                });
+                ValidShip.Add(new Pozice
+                {
+                    PozX = ShipTile.PozX + Kurzor.PozX ,
+                    PozY = ShipTile.PozY + Kurzor.PozY + 1
+                });
+                ValidShip.Add(new Pozice
+                {
+                    PozX = ShipTile.PozX + Kurzor.PozX ,
+                    PozY = ShipTile.PozY + Kurzor.PozY - 1
+                });
 
                 if (ShipTile.PozX + Kurzor.PozX >= 0 && ShipTile.PozX + Kurzor.PozX <= MapSize-1)
                 {
@@ -222,38 +261,84 @@ namespace ConsoleApp1
                 else
                 {
                     Console.WriteLine("not able place!!!3");
-                    AbleToPlace = false;
+                    BadCount++;
                 }
-                
+                if (MapState[ShipInt] != 0)
+                {
+                    BadCount++;
+                }
 
-                    if (ShipInt < MapMaxIndex && ShipInt >= 0 )/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
+                if (ShipInt < MapMaxIndex && ShipInt >= 0 )/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
                 {
                     MapState[ShipInt] = 2;
-                    //AbleToPlace = true;
+                    
+                    
 
                 }
                 else
                 {  
                     //not able place!!!
                     Console.WriteLine("not able place!!!2");
-                    AbleToPlace = false;
+                    BadCount++;
                 }
-            if (AbleToPlace == true && Place == true)
+            
+                    
+
+                                           
+            }
+            if (BadCount == 0 && Place == true )
                 {
-                    Console.WriteLine("Placing");
-                    MapStateReal = MapState.ToList();
-                    AbleToPlace = false;
+                int ShipValidInt;
+                Pozice ShipValidTile = new Pozice();
 
-                    /*for (int i = 0; i < ShipMaxIndex; i++)
+
+                Console.WriteLine("Placing"); 
+                for (int i = 0; i < ValidShip.Count; i++)
                     {
+                    AbleToPlace = true;
+                    ShipValidTile = ValidShip[i];
+                    ShipValidInt = (ShipValidTile.PozX) + ((ShipValidTile.PozY) * MapSize);
 
-                     */                          
-                 }
-                
-              }
+                    if (ShipValidTile.PozX >= 0 && ShipValidTile.PozX <= MapSize - 1)
+                    {
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("not able place!!!3");
+                        AbleToPlace = false;
+                    }
+
+
+                    if (ShipValidInt < MapMaxIndex && ShipValidInt >= 0)/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
+                    {
+                        
+                        if (MapState[ShipValidInt] == 0 && AbleToPlace == true)
+                        {
+                            MapState[ShipValidInt] = 5;
+                        }
+                        
+
+
+
+                    }
+                    else
+                    {
+                        //not able place!!!
+                        Console.WriteLine("not able place!!!2");
+                        AbleToPlace = false;
+                    }
+                }
+
+                MapStateReal = MapState.ToList();
+                }
+
+
+            
             
 
         }
 
     }
 }
+
