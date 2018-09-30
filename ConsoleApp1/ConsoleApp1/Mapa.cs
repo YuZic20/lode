@@ -11,7 +11,10 @@ namespace ConsoleApp1
         Lode Ships = new Lode();
         private int MapSize = 10;
 		private List<Pozice> Map = new List<Pozice>();
-		private List<int> MapState = new List<int>(); //0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
+        private List<List<int>> HitShips = new List<List<int>>();
+        private List<List<int>> HitShipsReal = new List<List<int>>();
+        private int HitShipsIndex = 0;
+        private List<int> MapState = new List<int>(); //0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
         private List<int> MapStateReal = new List<int>();
         private int MapMaxIndex = 0;
 		private string Voda = "o";
@@ -22,7 +25,7 @@ namespace ConsoleApp1
 		private Pozice Kurzor = new Pozice { PozX = 1, PozY = 1 };
 		private int KurzorInt = 0;
         private RotationState Rotate = 0;
-        private int help = 0;
+        //private int help = 0;
         private string LastInput;
         private bool AbleToPlace = false;
         private bool Place = false;
@@ -160,8 +163,9 @@ namespace ConsoleApp1
 			}
 			Console.WriteLine("PozX= " + Kurzor.PozX);
 			Console.WriteLine("PozY= " + Kurzor.PozY);
-            MapState = MapStateReal.ToList();
-            Rotate = RotationState.Unset;
+            MapState = MapStateReal.ToList();           
+            HitShips = HitShipsReal.ToList();
+        Rotate = RotationState.Unset;
             Place = false;
         }
 		public void MapKurzor(string Input)
@@ -228,6 +232,7 @@ namespace ConsoleApp1
             int ShipInt;
             int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);
             AbleToPlace = true;
+            HitShips.Add(new List<int> { 2 });
             for (int i = 0; i < ShipMaxIndex ; i++)
             {
                 ShipTile = Input.ShipTiles[i];
@@ -271,8 +276,8 @@ namespace ConsoleApp1
                 if (ShipInt < MapMaxIndex && ShipInt >= 0 )/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
                 {
                     MapState[ShipInt] = 2;
-                    
-                    
+                    HitShips[HitShipsIndex].Add(ShipInt);
+
 
                 }
                 else
@@ -331,11 +336,13 @@ namespace ConsoleApp1
                 }
 
                 MapStateReal = MapState.ToList();
-                }
+                HitShipsReal = HitShips.ToList();
+                HitShipsIndex++;
+            }
 
 
-            
-            
+
+
 
         }
 
