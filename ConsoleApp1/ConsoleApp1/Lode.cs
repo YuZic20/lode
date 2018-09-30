@@ -13,12 +13,13 @@ namespace ConsoleApp1
 
 
         public Lode()
-        {/*
-            public Lod ponorka = new Lod();
-            public Lod torpedoborec = new Lod();
-            public Lod kriznik = new Lod();
-            public Lod bitevni = new Lod();
-            public Lod letadlova = new Lod();*/
+        {
+            GeneratePonorka();
+            GenerateTorpedoborec();
+            GenerateKriznik();
+            GenerateBitevnik();
+            GenerateLetadlova();
+            GenerateHydroplan();
         }
 
 
@@ -28,17 +29,17 @@ namespace ConsoleApp1
         }
         public void GeneratePonorka()
         {
-            Pozice pivot = new Pozice()
+            Position pivot = new Position()
             {
-                PozX = 1,
-                PozY = 1
+                PosX = 1,
+                PosY = 1
             };
 
-            List<Pozice> LodObsah = new List<Pozice>();
-            LodObsah.Add(new Pozice
+            List<Position> LodObsah = new List<Position>();
+            LodObsah.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
 
             Lod lod = new Lod("Ponorka", pivot, LodObsah, LodObsah, LodObsah, LodObsah);
@@ -48,58 +49,58 @@ namespace ConsoleApp1
 
         public void GenerateTorpedoborec()
         {
-            Pozice pivot = new Pozice()
+            Position pivot = new Position()
             {
-                PozX = 1,
-                PozY = 1
+                PosX = 1,
+                PosY = 1
             };
 
-            List<Pozice> LodObsah1 = new List<Pozice>();
-            LodObsah1.Add(new Pozice
+            List<Position> LodObsah1 = new List<Position>();
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = 0
+                PosX = -1,
+                PosY = 0
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
-            });
-
-            List<Pozice> LodObsah2 = new List<Pozice>();
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -1,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -2,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
 
-            List<Pozice> LodObsah3 = new List<Pozice>();
-            LodObsah3.Add(new Pozice
+            List<Position> LodObsah2 = new List<Position>();
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah3.Add(new Pozice
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = -2
+                PosX = -2,
+                PosY = -1
             });
 
-            List<Pozice> LodObsah4 = new List<Pozice>();
-            LodObsah4.Add(new Pozice
+            List<Position> LodObsah3 = new List<Position>();
+            LodObsah3.Add(new Position
             {
-                PozX = -0,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah4.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -2
+            });
+
+            List<Position> LodObsah4 = new List<Position>();
+            LodObsah4.Add(new Position
+            {
+                PosX = -0,
+                PosY = -1
+            });
+            LodObsah4.Add(new Position
+            {
+                PosX = -1,
+                PosY = -1
             });
 
             Lod lod = new Lod("Torpedoborec", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);
@@ -108,78 +109,78 @@ namespace ConsoleApp1
         }
         public void GenerateKriznik()
         {
-            Pozice pivot = new Pozice()
+            Position pivot = new Position()
             {
-                PozX = 1,
-                PozY = 1
+                PosX = 1,
+                PosY = 1
             };
 
-            List<Pozice> LodObsah1 = new List<Pozice>();
-            LodObsah1.Add(new Pozice
+            List<Position> LodObsah1 = new List<Position>();
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = 0
+                PosX = -1,
+                PosY = 0
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -2
-            });
-
-            List<Pozice> LodObsah2 = new List<Pozice>();
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -0,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -1,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -2,
-                PozY = -1
+                PosX = -1,
+                PosY = -2
             });
 
-            List<Pozice> LodObsah3 = new List<Pozice>();
-            LodObsah3.Add(new Pozice
+            List<Position> LodObsah2 = new List<Position>();
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = 0
+                PosX = -0,
+                PosY = -1
             });
-            LodObsah3.Add(new Pozice
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah3.Add(new Pozice
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = -2
+                PosX = -2,
+                PosY = -1
             });
 
-            List<Pozice> LodObsah4 = new List<Pozice>();
-            LodObsah4.Add(new Pozice
+            List<Position> LodObsah3 = new List<Position>();
+            LodObsah3.Add(new Position
             {
-                PozX = -0,
-                PozY = -1
+                PosX = -1,
+                PosY = 0
             });
-            LodObsah4.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah4.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -2,
-                PozY = -1
+                PosX = -1,
+                PosY = -2
+            });
+
+            List<Position> LodObsah4 = new List<Position>();
+            LodObsah4.Add(new Position
+            {
+                PosX = -0,
+                PosY = -1
+            });
+            LodObsah4.Add(new Position
+            {
+                PosX = -1,
+                PosY = -1
+            });
+            LodObsah4.Add(new Position
+            {
+                PosX = -2,
+                PosY = -1
             });
 
             Lod lod = new Lod("Kriznik", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);
@@ -188,99 +189,99 @@ namespace ConsoleApp1
         }
         public void GenerateBitevnik()
         {
-            Pozice pivot = new Pozice()
+            Position pivot = new Position()
             {
-                PozX = 1,
-                PozY = 1
+                PosX = 1,
+                PosY = 1
             };
 
-            List<Pozice> LodObsah1 = new List<Pozice>();
-            LodObsah1.Add(new Pozice
+            List<Position> LodObsah1 = new List<Position>();
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = 0
+                PosX = -1,
+                PosY = 0
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -2
+                PosX = -1,
+                PosY = -2
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -3
-            });
-
-            List<Pozice> LodObsah2 = new List<Pozice>();
-            LodObsah2.Add(new Pozice
-            {
-                PozX = 0,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -1,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -2,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -3,
-                PozY = -1
+                PosX = -1,
+                PosY = -3
             });
 
+            List<Position> LodObsah2 = new List<Position>();
+            LodObsah2.Add(new Position
+            {
+                PosX = 0,
+                PosY = -1
+            });
+            LodObsah2.Add(new Position
+            {
+                PosX = -1,
+                PosY = -1
+            });
+            LodObsah2.Add(new Position
+            {
+                PosX = -2,
+                PosY = -1
+            });
+            LodObsah2.Add(new Position
+            {
+                PosX = -3,
+                PosY = -1
+            });
 
-            List<Pozice> LodObsah3 = new List<Pozice>();
-            LodObsah3.Add(new Pozice
+
+            List<Position> LodObsah3 = new List<Position>();
+            LodObsah3.Add(new Position
             {
-                PozX = -1,
-                PozY = -0
+                PosX = -1,
+                PosY = -0
             });
-            LodObsah3.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah3.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -1,
-                PozY = -2
+                PosX = -1,
+                PosY = -2
             });
-            LodObsah3.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -1,
-                PozY = -3
+                PosX = -1,
+                PosY = -3
             });
 
-            List<Pozice> LodObsah4 = new List<Pozice>();
-            LodObsah4.Add(new Pozice
+            List<Position> LodObsah4 = new List<Position>();
+            LodObsah4.Add(new Position
             {
-                PozX = -0,
-                PozY = -1
+                PosX = -0,
+                PosY = -1
             });
-            LodObsah4.Add(new Pozice
+            LodObsah4.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah4.Add(new Pozice
+            LodObsah4.Add(new Position
             {
-                PozX = -2,
-                PozY = -1
+                PosX = -2,
+                PosY = -1
             });
-            LodObsah4.Add(new Pozice
+            LodObsah4.Add(new Position
             {
-                PozX = -3,
-                PozY = -1
+                PosX = -3,
+                PosY = -1
             });
 
             Lod lod = new Lod("Bitevní Lod", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);
@@ -289,118 +290,118 @@ namespace ConsoleApp1
         }
         public void GenerateLetadlova()
         {
-            Pozice pivot = new Pozice()
+            Position pivot = new Position()
             {
-                PozX = 1,
-                PozY = 1
+                PosX = 1,
+                PosY = 1
             };
 
-            List<Pozice> LodObsah1 = new List<Pozice>();
-            LodObsah1.Add(new Pozice
+            List<Position> LodObsah1 = new List<Position>();
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = 0
+                PosX = -1,
+                PosY = 0
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -2
+                PosX = -1,
+                PosY = -2
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -3
+                PosX = -1,
+                PosY = -3
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -4
-            });
-
-            List<Pozice> LodObsah2 = new List<Pozice>();
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -0,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -1,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -2,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -3,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -4,
-                PozY = -1
+                PosX = -1,
+                PosY = -4
             });
 
-            List<Pozice> LodObsah3 = new List<Pozice>();
-            LodObsah3.Add(new Pozice
+            List<Position> LodObsah2 = new List<Position>();
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = 0
+                PosX = -0,
+                PosY = -1
             });
-            LodObsah3.Add(new Pozice
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah3.Add(new Pozice
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = -2
+                PosX = -2,
+                PosY = -1
             });
-            LodObsah3.Add(new Pozice
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = -3
+                PosX = -3,
+                PosY = -1
             });
-            LodObsah3.Add(new Pozice
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = -4
+                PosX = -4,
+                PosY = -1
             });
 
-            List<Pozice> LodObsah4 = new List<Pozice>();
-            LodObsah4.Add(new Pozice
+            List<Position> LodObsah3 = new List<Position>();
+            LodObsah3.Add(new Position
             {
-                PozX = -0,
-                PozY = -1
+                PosX = -1,
+                PosY = 0
             });
-            LodObsah4.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -1,
-                PozY = -1
+                PosX = -1,
+                PosY = -1
             });
-            LodObsah4.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -2,
-                PozY = -1
+                PosX = -1,
+                PosY = -2
             });
-            LodObsah4.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -3,
-                PozY = -1
+                PosX = -1,
+                PosY = -3
             });
-            LodObsah4.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -4,
-                PozY = -1
+                PosX = -1,
+                PosY = -4
+            });
+
+            List<Position> LodObsah4 = new List<Position>();
+            LodObsah4.Add(new Position
+            {
+                PosX = -0,
+                PosY = -1
+            });
+            LodObsah4.Add(new Position
+            {
+                PosX = -1,
+                PosY = -1
+            });
+            LodObsah4.Add(new Position
+            {
+                PosX = -2,
+                PosY = -1
+            });
+            LodObsah4.Add(new Position
+            {
+                PosX = -3,
+                PosY = -1
+            });
+            LodObsah4.Add(new Position
+            {
+                PosX = -4,
+                PosY = -1
             });
 
             Lod lod = new Lod("Letadlová lod", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);
@@ -409,78 +410,78 @@ namespace ConsoleApp1
         }
         public void GenerateHydroplan()
         {
-            Pozice pivot = new Pozice()
+            Position pivot = new Position()
             {
-                PozX = 2,
-                PozY = 2
+                PosX = 2,
+                PosY = 2
             };
 
-            List<Pozice> LodObsah1 = new List<Pozice>();
-            LodObsah1.Add(new Pozice
+            List<Position> LodObsah1 = new List<Position>();
+            LodObsah1.Add(new Position
             {
-                PozX = -1,
-                PozY = -2
+                PosX = -1,
+                PosY = -2
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -0,
-                PozY = -1
+                PosX = -0,
+                PosY = -1
             });
-            LodObsah1.Add(new Pozice
+            LodObsah1.Add(new Position
             {
-                PozX = -2,
-                PozY = -1
-            });
-
-            List<Pozice> LodObsah2 = new List<Pozice>();
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -1,
-                PozY = -2
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -0,
-                PozY = -1
-            });
-            LodObsah2.Add(new Pozice
-            {
-                PozX = -1,
-                PozY = -0
+                PosX = -2,
+                PosY = -1
             });
 
-            List<Pozice> LodObsah3 = new List<Pozice>();
-            LodObsah3.Add(new Pozice
+            List<Position> LodObsah2 = new List<Position>();
+            LodObsah2.Add(new Position
             {
-                PozX = -1,
-                PozY = -0
+                PosX = -1,
+                PosY = -2
             });
-            LodObsah3.Add(new Pozice
+            LodObsah2.Add(new Position
             {
-                PozX = -0,
-                PozY = -1
+                PosX = -0,
+                PosY = -1
             });
-            LodObsah3.Add(new Pozice
+            LodObsah2.Add(new Position
             {
-                PozX = -2,
-                PozY = -1
+                PosX = -1,
+                PosY = -0
             });
 
-            List<Pozice> LodObsah4 = new List<Pozice>();
-            LodObsah4.Add(new Pozice
+            List<Position> LodObsah3 = new List<Position>();
+            LodObsah3.Add(new Position
             {
-                PozX = -1,
-                PozY = -2
+                PosX = -1,
+                PosY = -0
             });
-            LodObsah4.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -2,
-                PozY = -1
+                PosX = -0,
+                PosY = -1
             });
-            LodObsah4.Add(new Pozice
+            LodObsah3.Add(new Position
             {
-                PozX = -1,
-                PozY = -0
+                PosX = -2,
+                PosY = -1
+            });
+
+            List<Position> LodObsah4 = new List<Position>();
+            LodObsah4.Add(new Position
+            {
+                PosX = -1,
+                PosY = -2
+            });
+            LodObsah4.Add(new Position
+            {
+                PosX = -2,
+                PosY = -1
+            });
+            LodObsah4.Add(new Position
+            {
+                PosX = -1,
+                PosY = -0
             });
 
             Lod lod = new Lod("Hydroplán", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Pozice
+    class Position
     {
-        public int PozX;
-        public int PozY;
+        public int PosX;
+        public int PosY;
     }
 }

@@ -10,17 +10,17 @@ namespace ConsoleApp1
     {
         
         public string ShipType;
-        public Pozice pivot;
-        private List<Pozice> LodStav1;
-        private List<Pozice> LodStav2;
-        private List<Pozice> LodStav3;
-        private List<Pozice> LodStav4;
-		public List<Pozice> ShipTiles;
+        public Position pivot;
+        private List<Position> LodStav1;
+        private List<Position> LodStav2;
+        private List<Position> LodStav3;
+        private List<Position> LodStav4;
+		public List<Position> ShipTiles;
 		RotationState ShipRotationState; // 1 = nahoru 2 = vpravo 3 = dolu 4 = vlevo
 		
 		
 
-        public Lod(string ShipTypeI, Pozice pivotI, List<Pozice> LodStav1I, List<Pozice> LodStav2I, List<Pozice> LodStav3I, List<Pozice> LodStav4I)
+        public Lod(string ShipTypeI, Position pivotI, List<Position> LodStav1I, List<Position> LodStav2I, List<Position> LodStav3I, List<Position> LodStav4I)
         {
             ShipType = ShipTypeI;
             pivot = pivotI;
@@ -28,7 +28,7 @@ namespace ConsoleApp1
             LodStav2 = LodStav2I;
             LodStav3 = LodStav3I;
             LodStav4 = LodStav4I;
-            ShipRotationState = RotationState.Nahoru;
+            ShipRotationState = RotationState.Up;
             ShipTiles = LodStav1;
 
             //generace lode
@@ -36,11 +36,11 @@ namespace ConsoleApp1
 
         public void ShipRotate(RotationState rotate) //rotace lodi
 		{
-			if (rotate == RotationState.Doprava)
+			if (rotate == RotationState.Right)
 			{
 				if (ShipRotationState == RotationState.Doleva)
 				{
-					ShipRotationState = RotationState.Nahoru;
+					ShipRotationState = RotationState.Up;
 				}
 				else
 				{
@@ -49,7 +49,7 @@ namespace ConsoleApp1
 			}
 			else if (rotate == RotationState.Doleva)
 			{
-				if (ShipRotationState == RotationState.Nahoru)
+				if (ShipRotationState == RotationState.Up)
 				{
 					ShipRotationState = RotationState.Doleva;
 				}
@@ -58,15 +58,15 @@ namespace ConsoleApp1
 					ShipRotationState--;
 				}
             }
-            if (ShipRotationState == RotationState.Nahoru)
+            if (ShipRotationState == RotationState.Up)
 			{
 				ShipTiles = LodStav1;
 			}
-			else if (ShipRotationState == RotationState.Doprava)
+			else if (ShipRotationState == RotationState.Right)
 			{
 				ShipTiles = LodStav2;
 			}
-			else if (ShipRotationState == RotationState.Dolu)
+			else if (ShipRotationState == RotationState.Down)
 			{
 				ShipTiles = LodStav3;
 			}
@@ -79,20 +79,7 @@ namespace ConsoleApp1
 			
 
 
-			/*
-			Pozice pivot = new Pozice()
-			{
-				PozX = 0,
-				PozY = 0
-			};
-
-			List<Pozice> LodObsah = new List<Pozice>();
-			LodObsah.Add(new Pozice
-			{
-				PozX = 0,
-				PozY = 0
-			});
-			*/
+		
 		
 
 

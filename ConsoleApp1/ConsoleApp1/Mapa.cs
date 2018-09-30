@@ -10,27 +10,28 @@ namespace ConsoleApp1
     {
         Lode Ships = new Lode();
         private int MapSize = 10;
-		private List<Pozice> Map = new List<Pozice>();
+		private List<Position> Map = new List<Position>();
         private List<List<int>> HitShips = new List<List<int>>();
         private List<List<int>> HitShipsReal = new List<List<int>>();
         private int HitShipsIndex = 0;
         private List<int> MapState = new List<int>();
         private List<int> MapStatePlayer = new List<int>();//0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
+        private List<int> MapStatePlayerReal = new List<int>();//0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
         private List<int> MapStateReal = new List<int>();
         private int MapMaxIndex = 0;
-		private string Voda = "o";
-		private string PotopenaLod = "X";
-		private string Lod = "H";
-		private string Strela = "X";
-		private string TrefenaLod = "X";
-		private Pozice Kurzor = new Pozice { PozX = 1, PozY = 1 };
+		private string Watter = "o";
+		private string Sunken = "X";
+		private string Ship = "H";
+		private string NotHit = "X";
+		private string Hit = "X";
+		private Position Kurzor = new Position { PosX = 1, PosY = 1 };
 		private int KurzorInt = 0;
         private RotationState Rotate = 0;
         //private int help = 0;
         private string LastInput;
         private bool AbleToPlace = false;
         private bool Place = false;
-        private int DestroyedShipsCount = 0;
+        private int DestroyedShipsCount;
         public string TextToPlayer = "";
         public int NumOFShips = 0;
 
@@ -45,16 +46,17 @@ namespace ConsoleApp1
                 for (int i = 1; i <= MapSize; i++)
                     {
 					MapState.Add(0);
-                    Map.Add(new Pozice
+                    Map.Add(new Position
                     {
-                        PozX = i,
-                        PozY = a
+                        PosX = i,
+                        PosY = a
                     });
                 }
             }
 			MapMaxIndex = Map.Count;
             MapStateReal = MapState;
             MapStatePlayer = MapState;
+            MapStatePlayerReal = MapStatePlayer;
 
 
 
@@ -64,7 +66,7 @@ namespace ConsoleApp1
 		public void PrintMap()
 		{
             
-            KurzorInt = (Kurzor.PozX - 1) + ((Kurzor.PozY - 1) * MapSize);
+            KurzorInt = (Kurzor.PosX - 1) + ((Kurzor.PosY - 1) * MapSize);
             int TableHelper = 1;
 			for (int i = 1; i <= MapSize; i++) // vypsání čísel top
 			{
@@ -83,7 +85,7 @@ namespace ConsoleApp1
 					if (MapState[i-1] == 0)
 					{
 						Console.ForegroundColor = ConsoleColor.Blue;
-						Console.Write(Voda);
+						Console.Write(Watter);
 						Console.ResetColor();
 						Console.Write(" ");
 						
@@ -91,31 +93,31 @@ namespace ConsoleApp1
 					else if (MapState[i-1] == 1)
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
-						Console.Write(PotopenaLod);
+						Console.Write(Sunken);
 						Console.ResetColor();
 						Console.Write(" ");
 					}
 					else if (MapState[i - 1] == 2)
 					{
                         Console.ResetColor();
-                        Console.Write(Lod + " ");
+                        Console.Write(Ship + " ");
                         					}
 					else if (MapState[i - 1] == 3)
 					{
                         Console.ResetColor();
-                        Console.Write(Strela + " ");
+                        Console.Write(NotHit + " ");
 					}
 					else if (MapState[i - 1] == 4)
 					{
 						Console.ForegroundColor = ConsoleColor.Yellow;
-						Console.Write(TrefenaLod);
+						Console.Write(Hit);
 						Console.ResetColor();
 						Console.Write(" ");
 					}
                     else if (MapState[i - 1] == 5)
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write(Voda);
+                        Console.Write(Watter);
                         Console.ResetColor();
                         Console.Write(" ");
 
@@ -130,38 +132,38 @@ namespace ConsoleApp1
 					if (MapState[i - 1] == 0)
 					{
 						Console.ForegroundColor = ConsoleColor.Blue;
-						Console.Write(Voda);
+						Console.Write(Watter);
 						Console.ResetColor();
 						Console.Write(" ");
 					}
 					else if (MapState[i - 1] == 1)
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
-						Console.Write(PotopenaLod);
+						Console.Write(Sunken);
 						Console.ResetColor();
 						Console.Write(" ");
 					}
 					else if (MapState[i - 1] == 2)
 					{
                         Console.ResetColor();
-                        Console.Write(Lod + " ");
+                        Console.Write(Ship + " ");
 					}
 					else if (MapState[i - 1] == 3)
 					{
                         Console.ResetColor();
-                        Console.Write(Strela + " ");
+                        Console.Write(NotHit + " ");
 					}
 					else if (MapState[i - 1] == 4)
 					{
 						Console.ForegroundColor = ConsoleColor.Yellow;
-						Console.Write(TrefenaLod);
+						Console.Write(Hit);
 						Console.ResetColor();
 						Console.Write(" ");
 					}
                     else if (MapState[i - 1] == 5)
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write(Voda);
+                        Console.Write(Watter);
                         Console.ResetColor();
                         Console.Write(" ");
 
@@ -176,7 +178,7 @@ namespace ConsoleApp1
         public void PrintMapToHit()
         {
 
-            KurzorInt = (Kurzor.PozX - 1) + ((Kurzor.PozY - 1) * MapSize);
+            KurzorInt = (Kurzor.PosX - 1) + ((Kurzor.PosY - 1) * MapSize);
             int TableHelper = 1;
             for (int i = 1; i <= MapSize; i++) // vypsání čísel top
             {
@@ -187,7 +189,7 @@ namespace ConsoleApp1
             {
                 if (KurzorInt == i - 1)
                 {
-                    Console.BackgroundColor = ConsoleColor.White;
+                    //Console.BackgroundColor = ConsoleColor.White;
                 }
 
                 if (i % MapSize == 0 || i == 0)
@@ -195,7 +197,7 @@ namespace ConsoleApp1
                     if (MapStatePlayer[i - 1] == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write(Voda);
+                        Console.Write(Watter);
                         Console.ResetColor();
                         Console.Write(" ");
 
@@ -203,31 +205,31 @@ namespace ConsoleApp1
                     else if (MapStatePlayer[i - 1] == 1)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(PotopenaLod);
+                        Console.Write(Sunken);
                         Console.ResetColor();
                         Console.Write(" ");
                     }
                     else if (MapStatePlayer[i - 1] == 2)
                     {
                         Console.ResetColor();
-                        Console.Write(Lod + " ");
+                        Console.Write(Ship + " ");
                     }
                     else if (MapStatePlayer[i - 1] == 3)
                     {
                         Console.ResetColor();
-                        Console.Write(Strela + " ");
+                        Console.Write(NotHit + " ");
                     }
                     else if (MapStatePlayer[i - 1] == 4)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.Write(TrefenaLod);
+                        Console.Write(Hit);
                         Console.ResetColor();
                         Console.Write(" ");
                     }
                     else if (MapStatePlayer[i - 1] == 5)
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write(Voda);
+                        Console.Write(Watter);
                         Console.ResetColor();
                         Console.Write(" ");
 
@@ -242,47 +244,46 @@ namespace ConsoleApp1
                     if (MapStatePlayer[i - 1] == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write(Voda);
+                        Console.Write(Watter);
                         Console.ResetColor();
                         Console.Write(" ");
                     }
                     else if (MapStatePlayer[i - 1] == 1)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(PotopenaLod);
+                        Console.Write(Sunken);
                         Console.ResetColor();
                         Console.Write(" ");
                     }
                     else if (MapStatePlayer[i - 1] == 2)
                     {
                         Console.ResetColor();
-                        Console.Write(Lod + " ");
+                        Console.Write(Ship + " ");
                     }
                     else if (MapStatePlayer[i - 1] == 3)
                     {
                         Console.ResetColor();
-                        Console.Write(Strela + " ");
+                        Console.Write(NotHit + " ");
                     }
                     else if (MapStatePlayer[i - 1] == 4)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.Write(TrefenaLod);
+                        Console.Write(Hit);
                         Console.ResetColor();
                         Console.Write(" ");
                     }
                     else if (MapStatePlayer[i - 1] == 5)
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write(Voda);
+                        Console.Write(Watter);
                         Console.ResetColor();
                         Console.Write(" ");
 
                     }
                 }
             }
-            Console.WriteLine("PozX= " + Kurzor.PozX);
-            Console.WriteLine("PozY= " + Kurzor.PozY);
             MapState = MapStateReal.ToList();
+            MapStatePlayer = MapStatePlayerReal.ToList();
             HitShips = HitShipsReal.ToList();
             Rotate = RotationState.Unset;
             Place = false;
@@ -293,36 +294,36 @@ namespace ConsoleApp1
             LastInput = Input;
 			if (Input == "w")
 			{
-				if (Kurzor.PozY > 1)
+				if (Kurzor.PosY > 1)
 				{
-					Kurzor.PozY--;
+					Kurzor.PosY--;
 				}
 				
 			}
 			else if (Input == "d")
 			{
-				if (Kurzor.PozX < MapSize)
+				if (Kurzor.PosX < MapSize)
 				{
-					Kurzor.PozX++;
+					Kurzor.PosX++;
 				}
 			}
 			else if (Input == "s")
 			{
-				if (Kurzor.PozY < MapSize)
+				if (Kurzor.PosY < MapSize)
 				{
-					Kurzor.PozY++;
+					Kurzor.PosY++;
 				}
 			}
 			else if (Input == "a")
 			{
-				if (Kurzor.PozX > 1)
+				if (Kurzor.PosX > 1)
 				{
-					Kurzor.PozX--;
+					Kurzor.PosX--;
 				}
             }
             else if ( Input == "e")
             {
-                Rotate = RotationState.Doprava;
+                Rotate = RotationState.Right;
             }
             else if (Input == "q")
             {
@@ -344,42 +345,42 @@ namespace ConsoleApp1
                 Input.ShipRotate(Rotate);
             }
             TextToPlayer = "Pokládáš: " + Input.ShipType;
-            List<Pozice> ValidShip = new List<Pozice>();
+            List<Position> ValidShip = new List<Position>();
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
             int BadCount = 0;
-            Pozice ShipTile = new Pozice();
+            Position ShipTile = new Position();
             int ShipInt;
-            int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);
+            int KurzorInt = (Kurzor.PosX) + ((Kurzor.PosY) * MapSize);
             AbleToPlace = true;
             HitShips.Add(new List<int> { 0 });
             for (int i = 0; i < ShipMaxIndex ; i++)
             {
                 ShipTile = Input.ShipTiles[i];
-                ShipInt = (ShipTile.PozX + Kurzor.PozX) + ((ShipTile.PozY + Kurzor.PozY) * MapSize);
+                ShipInt = (ShipTile.PosX + Kurzor.PosX) + ((ShipTile.PosY + Kurzor.PosY) * MapSize);
 
-                ValidShip.Add(new Pozice
+                ValidShip.Add(new Position
                 {
-                    PozX = ShipTile.PozX + Kurzor.PozX + 1,
-                    PozY = ShipTile.PozY + Kurzor.PozY
+                    PosX = ShipTile.PosX + Kurzor.PosX + 1,
+                    PosY = ShipTile.PosY + Kurzor.PosY
                 });
-                ValidShip.Add(new Pozice
+                ValidShip.Add(new Position
                 {
-                    PozX = ShipTile.PozX + Kurzor.PozX - 1,
-                    PozY = ShipTile.PozY + Kurzor.PozY 
+                    PosX = ShipTile.PosX + Kurzor.PosX - 1,
+                    PosY = ShipTile.PosY + Kurzor.PosY 
                 });
-                ValidShip.Add(new Pozice
+                ValidShip.Add(new Position
                 {
-                    PozX = ShipTile.PozX + Kurzor.PozX ,
-                    PozY = ShipTile.PozY + Kurzor.PozY + 1
+                    PosX = ShipTile.PosX + Kurzor.PosX ,
+                    PosY = ShipTile.PosY + Kurzor.PosY + 1
                 });
-                ValidShip.Add(new Pozice
+                ValidShip.Add(new Position
                 {
-                    PozX = ShipTile.PozX + Kurzor.PozX ,
-                    PozY = ShipTile.PozY + Kurzor.PozY - 1
+                    PosX = ShipTile.PosX + Kurzor.PosX ,
+                    PosY = ShipTile.PosY + Kurzor.PosY - 1
                 });
 
-                if (ShipTile.PozX + Kurzor.PozX >= 0 && ShipTile.PozX + Kurzor.PozX <= MapSize-1)
+                if (ShipTile.PosX + Kurzor.PosX >= 0 && ShipTile.PosX + Kurzor.PosX <= MapSize-1)
                 {
               
                 }
@@ -416,16 +417,16 @@ namespace ConsoleApp1
             if (BadCount == 0 && Place == true )
                 {
                 int ShipValidInt;
-                Pozice ShipValidTile = new Pozice();
+                Position ShipValidTile = new Position();
 
  
                 for (int i = 0; i < ValidShip.Count; i++)
                     {
                     AbleToPlace = true;
                     ShipValidTile = ValidShip[i];
-                    ShipValidInt = (ShipValidTile.PozX) + ((ShipValidTile.PozY) * MapSize);
+                    ShipValidInt = (ShipValidTile.PosX) + ((ShipValidTile.PosY) * MapSize);
 
-                    if (ShipValidTile.PozX >= 0 && ShipValidTile.PozX <= MapSize - 1)
+                    if (ShipValidTile.PosX >= 0 && ShipValidTile.PosX <= MapSize - 1)
                     {
                         
                     }
@@ -475,19 +476,19 @@ namespace ConsoleApp1
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
             int BadCount = 0;
-            Pozice ShipTile = new Pozice();
+            Position ShipTile = new Position();
             int ShipInt;
-            int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);
+            int KurzorInt = (Kurzor.PosX) + ((Kurzor.PosY) * MapSize);
             AbleToPlace = true;
             
             for (int i = 0; i < ShipMaxIndex; i++)
             {
                 ShipTile = Input.ShipTiles[i];
-                ShipInt = (ShipTile.PozX + Kurzor.PozX) + ((ShipTile.PozY + Kurzor.PozY) * MapSize);
+                ShipInt = (ShipTile.PosX + Kurzor.PosX) + ((ShipTile.PosY + Kurzor.PosY) * MapSize);
 
 
 
-                if (ShipTile.PozX + Kurzor.PozX >= 0 && ShipTile.PozX + Kurzor.PozX <= MapSize - 1)
+                if (ShipTile.PosX + Kurzor.PosX >= 0 && ShipTile.PosX + Kurzor.PosX <= MapSize - 1)
                 {
 
                 }
@@ -502,11 +503,13 @@ namespace ConsoleApp1
                 {
                     
                     
-                    if(MapState[ShipInt] == 2)
+                    if(MapState[ShipInt] == 2 || MapState[ShipInt] == 0)
                     {
                         MapShipShoot.Add(ShipInt);
                     }
-                    MapState[ShipInt] = 3;
+
+                    MapStatePlayer[ShipInt] = 3;
+                    
 
 
                 }
@@ -521,31 +524,34 @@ namespace ConsoleApp1
 
 
             }
+
             if (BadCount == 0 && Place == true)
             {
-                
-
+                MapStatePlayer = MapStatePlayerReal.ToList();
+                MapState = MapStateReal.ToList(); 
                 for (int i = 0; i < MapShipShoot.Count(); i++)
                 {
                     ShipInt = MapShipShoot[i];
 
-                    if (MapState[ShipInt] == 2)
+                    if (MapStateReal[ShipInt] == 2)
                     {
                         MapState[ShipInt] = 4;
-                        for (int d = 0; d <= HitShips.Count; d++)
+                        MapStatePlayer[ShipInt] = 4;
+                        for (int d = 0; d < HitShips.Count; d++)
                         {
-                            int count = 0;
-                            for (int g = 1; g <= HitShips[d].Count; g++)
+                            for (int g = 1; g < HitShips[d].Count; g++)
                             {
                                 if (HitShips[d][g] == ShipInt)
                                 {
                                     HitShips[d][0]++;
                                     if (HitShips[d][0] == HitShips[d].Count - 1)
                                     {
-                                        for (int f = 1; f <= HitShips[d].Count; f++)
+                                        for (int f = 1; f < HitShips[d].Count; f++)
                                         {
                                             MapState[HitShips[d][f]] = 1;
-                                            
+                                            MapStatePlayer[HitShips[d][f]] = 1;
+
+
 
                                         }
                                         DestroyedShipsCount++;
@@ -556,15 +562,19 @@ namespace ConsoleApp1
                                 
                             }
                         }
+                    }else if (MapStateReal[ShipInt] == 0)
+                    {
+                        MapStatePlayer[ShipInt] = 3;
                     }
 
                     
                  }
 
-
+                MapStatePlayerReal = MapStatePlayer.ToList();
                 MapStateReal = MapState.ToList();
                 HitShipsReal = HitShips.ToList();
             }
+            
 
 
 
@@ -581,19 +591,19 @@ namespace ConsoleApp1
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
             int BadCount = 0;
-            Pozice ShipTile = new Pozice();
+            Position ShipTile = new Position();
             int ShipInt;
-            int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);
+            int KurzorInt = (Kurzor.PosX) + ((Kurzor.PosY) * MapSize);
             AbleToPlace = true;
 
             for (int i = 0; i < ShipMaxIndex; i++)
             {
                 ShipTile = Input.ShipTiles[i];
-                ShipInt = (ShipTile.PozX + Kurzor.PozX) + ((ShipTile.PozY + Kurzor.PozY) * MapSize);
+                ShipInt = (ShipTile.PosX + Kurzor.PosX) + ((ShipTile.PosY + Kurzor.PosY) * MapSize);
 
 
 
-                if (ShipTile.PozX + Kurzor.PozX >= 0 && ShipTile.PozX + Kurzor.PozX <= MapSize - 1)
+                if (ShipTile.PosX + Kurzor.PosX >= 0 && ShipTile.PosX + Kurzor.PosX <= MapSize - 1)
                 {
 
                 }
@@ -608,11 +618,13 @@ namespace ConsoleApp1
                 {
 
 
-                    if (MapState[ShipInt] == 2)
+                    if (MapState[ShipInt] == 2 || MapState[ShipInt] == 0)
                     {
                         MapShipShoot.Add(ShipInt);
                     }
-                    MapState[ShipInt] = 3;
+                    
+                    
+                    MapStatePlayer[ShipInt] = 3;
 
 
                 }
@@ -627,23 +639,29 @@ namespace ConsoleApp1
 
 
             }
+            
             if (BadCount == 0 && Place == true)
             {
+                MapStatePlayer = MapStatePlayerReal.ToList();
 
                 for (int i = 0; i < MapShipShoot.Count(); i++)
                 {
                     ShipInt = MapShipShoot[i];
 
-                    if (MapState[ShipInt] == 2)
+                    if (MapStateReal[ShipInt] == 2)
                     {
                         MapStatePlayer[ShipInt] = 2;
+
                         
+                    }else
+                    {
+                        MapStatePlayer[ShipInt] = 3;
                     }
 
 
                 }
 
-
+                MapStatePlayerReal= MapStatePlayer.ToList();
                 MapStateReal = MapState.ToList();
                 HitShipsReal = HitShips.ToList();
 
@@ -659,6 +677,22 @@ namespace ConsoleApp1
             else
             {
                 return false;
+            }
+
+
+        }
+        public void RemoveInvalid()
+        {
+             for (int i = 0; i < MapMaxIndex; i++)
+            {
+
+                if (MapState[i] == 5)
+                {
+                    MapState[i] = 0;
+                    MapStateReal[i] = 0;
+                    MapStatePlayerReal[i] = 0;
+                    MapStatePlayer[i] = 0;
+                }
             }
 
 
