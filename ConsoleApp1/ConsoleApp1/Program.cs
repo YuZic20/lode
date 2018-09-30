@@ -36,7 +36,7 @@ namespace ConsoleApp1
 
 			while (game)
 			{
-				Mapa.PrintMap();
+				Mapa.PrintMapToHit();
 				input = Console.ReadKey();
 				inputToKursor = input.KeyChar.ToString();
 				Mapa.MapKurzor(inputToKursor);

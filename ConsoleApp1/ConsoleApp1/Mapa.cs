@@ -14,7 +14,8 @@ namespace ConsoleApp1
         private List<List<int>> HitShips = new List<List<int>>();
         private List<List<int>> HitShipsReal = new List<List<int>>();
         private int HitShipsIndex = 0;
-        private List<int> MapState = new List<int>(); //0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
+        private List<int> MapState = new List<int>();
+        private List<int> MapStatePlayer = new List<int>();//0=voda; 1=potopena lod; 2= lod; 3 strela; 4 trefena lod; 5 = invalid spot
         private List<int> MapStateReal = new List<int>();
         private int MapMaxIndex = 0;
 		private string Voda = "o";
@@ -50,8 +51,11 @@ namespace ConsoleApp1
             }
 			MapMaxIndex = Map.Count;
             MapStateReal = MapState;
-			
-		}
+            MapStatePlayer = MapState;
+
+
+
+        }
 
 
 		public void PrintMap()
@@ -168,7 +172,118 @@ namespace ConsoleApp1
         Rotate = RotationState.Unset;
             Place = false;
         }
-		public void MapKurzor(string Input)
+        public void PrintMapToHit()
+        {
+
+            KurzorInt = (Kurzor.PozX - 1) + ((Kurzor.PozY - 1) * MapSize);
+            int TableHelper = 1;
+            for (int i = 1; i <= MapSize; i++) // vypsání čísel top
+            {
+                Console.Write((i) + " ");
+            }
+            Console.WriteLine();
+            for (int i = 1; i <= MapMaxIndex; i++)
+            {
+                if (KurzorInt == i - 1)
+                {
+                    Console.BackgroundColor = ConsoleColor.White;
+                }
+
+                if (i % MapSize == 0 || i == 0)
+                {
+                    if (MapStatePlayer[i - 1] == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(Voda);
+                        Console.ResetColor();
+                        Console.Write(" ");
+
+                    }
+                    else if (MapStatePlayer[i - 1] == 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(PotopenaLod);
+                        Console.ResetColor();
+                        Console.Write(" ");
+                    }
+                    else if (MapStatePlayer[i - 1] == 2)
+                    {
+                        Console.ResetColor();
+                        Console.Write(Lod + " ");
+                    }
+                    else if (MapStatePlayer[i - 1] == 3)
+                    {
+                        Console.ResetColor();
+                        Console.Write(Strela + " ");
+                    }
+                    else if (MapStatePlayer[i - 1] == 4)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(TrefenaLod);
+                        Console.ResetColor();
+                        Console.Write(" ");
+                    }
+                    else if (MapStatePlayer[i - 1] == 5)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(Voda);
+                        Console.ResetColor();
+                        Console.Write(" ");
+
+                    }
+
+                    Console.WriteLine(" " + (TableHelper));
+                    TableHelper++;
+                }
+
+                else
+                {
+                    if (MapStatePlayer[i - 1] == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(Voda);
+                        Console.ResetColor();
+                        Console.Write(" ");
+                    }
+                    else if (MapStatePlayer[i - 1] == 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(PotopenaLod);
+                        Console.ResetColor();
+                        Console.Write(" ");
+                    }
+                    else if (MapStatePlayer[i - 1] == 2)
+                    {
+                        Console.ResetColor();
+                        Console.Write(Lod + " ");
+                    }
+                    else if (MapStatePlayer[i - 1] == 3)
+                    {
+                        Console.ResetColor();
+                        Console.Write(Strela + " ");
+                    }
+                    else if (MapStatePlayer[i - 1] == 4)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(TrefenaLod);
+                        Console.ResetColor();
+                        Console.Write(" ");
+                    }
+                    else if (MapStatePlayer[i - 1] == 5)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(Voda);
+                        Console.ResetColor();
+                        Console.Write(" ");
+
+                    }
+                }
+            }
+            Console.WriteLine("PozX= " + Kurzor.PozX);
+            Console.WriteLine("PozY= " + Kurzor.PozY);
+                                  
+        }
+        public void MapKurzor(string Input)
 		{
             LastInput = Input;
 			if (Input == "w")
