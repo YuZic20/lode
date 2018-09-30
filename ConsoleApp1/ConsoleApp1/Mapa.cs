@@ -343,7 +343,7 @@ namespace ConsoleApp1
             {
                 Input.ShipRotate(Rotate);
             }
-            TextToPlayer = "pokládáš: " + Input.ShipType;
+            TextToPlayer = "Pokládáš: " + Input.ShipType;
             List<Pozice> ValidShip = new List<Pozice>();
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
@@ -395,6 +395,7 @@ namespace ConsoleApp1
                     if (MapState[ShipInt] != 0)
                     {
                         BadCount++;
+                        TextToPlayer = "Zde nelze polozit lod";
                     }
                     MapState[ShipInt] = 2;
                     HitShips[HitShipsIndex].Add(ShipInt);
