@@ -106,5 +106,386 @@ namespace ConsoleApp1
 
             TemplateShips.Add(lod);
         }
+        public void GenerateKriznik()
+        {
+            Pozice pivot = new Pozice()
+            {
+                PozX = 1,
+                PozY = 1
+            };
+
+            List<Pozice> LodObsah1 = new List<Pozice>();
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = 0
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -2
+            });
+
+            List<Pozice> LodObsah2 = new List<Pozice>();
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -0,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -2,
+                PozY = -1
+            });
+
+            List<Pozice> LodObsah3 = new List<Pozice>();
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = 0
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -2
+            });
+
+            List<Pozice> LodObsah4 = new List<Pozice>();
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -0,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -2,
+                PozY = -1
+            });
+
+            Lod lod = new Lod("Kriznik", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);
+
+            TemplateShips.Add(lod);
+        }
+        public void GenerateBitevnik()
+        {
+            Pozice pivot = new Pozice()
+            {
+                PozX = 1,
+                PozY = 1
+            };
+
+            List<Pozice> LodObsah1 = new List<Pozice>();
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = 0
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -2
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -3
+            });
+
+            List<Pozice> LodObsah2 = new List<Pozice>();
+            LodObsah2.Add(new Pozice
+            {
+                PozX = 0,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -2,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -3,
+                PozY = -1
+            });
+
+
+            List<Pozice> LodObsah3 = new List<Pozice>();
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -0
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -2
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -3
+            });
+
+            List<Pozice> LodObsah4 = new List<Pozice>();
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -0,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -2,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -3,
+                PozY = -1
+            });
+
+            Lod lod = new Lod("Bitevní Lod", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);
+
+            TemplateShips.Add(lod);
+        }
+        public void GenerateLetadlova()
+        {
+            Pozice pivot = new Pozice()
+            {
+                PozX = 1,
+                PozY = 1
+            };
+
+            List<Pozice> LodObsah1 = new List<Pozice>();
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = 0
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -2
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -3
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -4
+            });
+
+            List<Pozice> LodObsah2 = new List<Pozice>();
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -0,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -2,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -3,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -4,
+                PozY = -1
+            });
+
+            List<Pozice> LodObsah3 = new List<Pozice>();
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = 0
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -2
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -3
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -4
+            });
+
+            List<Pozice> LodObsah4 = new List<Pozice>();
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -0,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -2,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -3,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -4,
+                PozY = -1
+            });
+
+            Lod lod = new Lod("Letadlová lod", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);
+
+            TemplateShips.Add(lod);
+        }
+        public void GenerateHydroplan()
+        {
+            Pozice pivot = new Pozice()
+            {
+                PozX = 2,
+                PozY = 2
+            };
+
+            List<Pozice> LodObsah1 = new List<Pozice>();
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -2
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -0,
+                PozY = -1
+            });
+            LodObsah1.Add(new Pozice
+            {
+                PozX = -2,
+                PozY = -1
+            });
+
+            List<Pozice> LodObsah2 = new List<Pozice>();
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -2
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -0,
+                PozY = -1
+            });
+            LodObsah2.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -0
+            });
+
+            List<Pozice> LodObsah3 = new List<Pozice>();
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -0
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -0,
+                PozY = -1
+            });
+            LodObsah3.Add(new Pozice
+            {
+                PozX = -2,
+                PozY = -1
+            });
+
+            List<Pozice> LodObsah4 = new List<Pozice>();
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -2
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -2,
+                PozY = -1
+            });
+            LodObsah4.Add(new Pozice
+            {
+                PozX = -1,
+                PozY = -0
+            });
+
+            Lod lod = new Lod("Hydroplán", pivot, LodObsah1, LodObsah2, LodObsah3, LodObsah4);
+
+            TemplateShips.Add(lod);
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace ConsoleApp1
         private bool AbleToPlace = false;
         private bool Place = false;
         private int DestroyedShipsCount = 0;
+        public string TextToPlayer = "";
+        public int NumOFShips = 0;
 
         //MapState[help] = 4;
 
@@ -73,7 +75,7 @@ namespace ConsoleApp1
 			{
 				if (KurzorInt == i-1)
 				{
-					Console.BackgroundColor = ConsoleColor.White;
+					//Console.BackgroundColor = ConsoleColor.White;
 				}
 				
 				if (i % MapSize == 0 || i == 0)
@@ -166,8 +168,6 @@ namespace ConsoleApp1
                     }
                 }
 			}
-			Console.WriteLine("PozX= " + Kurzor.PozX);
-			Console.WriteLine("PozY= " + Kurzor.PozY);
             MapState = MapStateReal.ToList();           
             HitShips = HitShipsReal.ToList();
         Rotate = RotationState.Unset;
@@ -343,7 +343,7 @@ namespace ConsoleApp1
             {
                 Input.ShipRotate(Rotate);
             }
-            Console.WriteLine("pokládáš: " + Input.ShipType);
+            TextToPlayer = "pokládáš: " + Input.ShipType;
             List<Pozice> ValidShip = new List<Pozice>();
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
@@ -385,7 +385,7 @@ namespace ConsoleApp1
                 }
                 else
                 {
-                    Console.WriteLine("not able place!!!3");
+                    TextToPlayer = "Zde nelze položit lod";
                     BadCount++;
                 }
                 
@@ -402,9 +402,9 @@ namespace ConsoleApp1
 
                 }
                 else
-                {  
+                {
                     //not able place!!!
-                    Console.WriteLine("not able place!!!2");
+                    TextToPlayer = "Zde nelze polozit lod";
                     BadCount++;
                 }
             
@@ -417,8 +417,7 @@ namespace ConsoleApp1
                 int ShipValidInt;
                 Pozice ShipValidTile = new Pozice();
 
-
-                Console.WriteLine("Placing"); 
+ 
                 for (int i = 0; i < ValidShip.Count; i++)
                     {
                     AbleToPlace = true;
@@ -431,12 +430,11 @@ namespace ConsoleApp1
                     }
                     else
                     {
-                        Console.WriteLine("not able place!!!3");
                         AbleToPlace = false;
                     }
 
 
-                    if (ShipValidInt < MapMaxIndex && ShipValidInt >= 0)/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
+                    if (ShipValidInt < MapMaxIndex && ShipValidInt >= 0)
                     {
                         
                         if (MapState[ShipValidInt] == 0 && AbleToPlace == true)
@@ -450,12 +448,11 @@ namespace ConsoleApp1
                     }
                     else
                     {
-                        //not able place!!!
-                        Console.WriteLine("not able place!!!2");
+                       
                         AbleToPlace = false;
                     }
                 }
-
+                NumOFShips++;
                 MapStateReal = MapState.ToList();
                 HitShipsReal = HitShips.ToList();
                 HitShipsIndex++;
@@ -473,7 +470,7 @@ namespace ConsoleApp1
                 Input.ShipRotate(Rotate);
             }
             List<int> MapShipShoot = new List<int>();
-            Console.WriteLine("pokládáš: " + Input.ShipType);
+            TextToPlayer = "Používáš ostrou munici";
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
             int BadCount = 0;
@@ -495,7 +492,7 @@ namespace ConsoleApp1
                 }
                 else
                 {
-                    Console.WriteLine("not able place!!!3");
+                    TextToPlayer = "Zde nemůžeš střílet";
                     BadCount++;
                 }
 
@@ -515,7 +512,7 @@ namespace ConsoleApp1
                 else
                 {
                     //not able place!!!
-                    Console.WriteLine("not able place!!!2");
+                    TextToPlayer = "Zde nemůžeš střílet";
                     BadCount++;
                 }
 
@@ -526,8 +523,7 @@ namespace ConsoleApp1
             if (BadCount == 0 && Place == true)
             {
                 
-                Console.WriteLine("Placing");
-                //MapState = MapStateReal.ToList();
+
                 for (int i = 0; i < MapShipShoot.Count(); i++)
                 {
                     ShipInt = MapShipShoot[i];
@@ -580,6 +576,7 @@ namespace ConsoleApp1
                 Input.ShipRotate(Rotate);
             }
             List<int> MapShipShoot = new List<int>();
+            TextToPlayer = "Používáš slepou munici";
             Kurzor = Input.pivot;
             int ShipMaxIndex = Input.ShipTiles.Count;
             int BadCount = 0;
@@ -601,7 +598,7 @@ namespace ConsoleApp1
                 }
                 else
                 {
-                    Console.WriteLine("not able place!!!3");
+                    TextToPlayer = "Zde nemůžeš střílet";
                     BadCount++;
                 }
 
@@ -621,7 +618,7 @@ namespace ConsoleApp1
                 else
                 {
                     //not able place!!!
-                    Console.WriteLine("not able place!!!2");
+                    TextToPlayer = "Zde nemůžeš střílet";
                     BadCount++;
                 }
 
