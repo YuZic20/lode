@@ -36,14 +36,14 @@ namespace ConsoleApp1
 
 			while (game)
 			{
-				Mapa.PrintMapToHit();
-				input = Console.ReadKey();
-				inputToKursor = input.KeyChar.ToString();
-				Mapa.MapKurzor(inputToKursor);
-                Mapa.PlaceShip(Ships.GetShip(1));
-				//Console.Clear();
+				
 
-			}
+                Mapa.PrintMap();
+                input = Console.ReadKey();
+                inputToKursor = input.KeyChar.ToString();
+                Mapa.MapKurzor(inputToKursor);
+                Mapa.Shoot(Ships.GetShip(1));
+            }
 
 		}
     }

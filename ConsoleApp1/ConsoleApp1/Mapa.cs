@@ -30,6 +30,7 @@ namespace ConsoleApp1
         private string LastInput;
         private bool AbleToPlace = false;
         private bool Place = false;
+        private int DestroyedShipsCount = 0;
 
         //MapState[help] = 4;
 
@@ -281,7 +282,11 @@ namespace ConsoleApp1
             }
             Console.WriteLine("PozX= " + Kurzor.PozX);
             Console.WriteLine("PozY= " + Kurzor.PozY);
-                                  
+            MapState = MapStateReal.ToList();
+            HitShips = HitShipsReal.ToList();
+            Rotate = RotationState.Unset;
+            Place = false;
+
         }
         public void MapKurzor(string Input)
 		{
@@ -347,7 +352,7 @@ namespace ConsoleApp1
             int ShipInt;
             int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);
             AbleToPlace = true;
-            HitShips.Add(new List<int> { 2 });
+            HitShips.Add(new List<int> { 0 });
             for (int i = 0; i < ShipMaxIndex ; i++)
             {
                 ShipTile = Input.ShipTiles[i];
@@ -383,13 +388,14 @@ namespace ConsoleApp1
                     Console.WriteLine("not able place!!!3");
                     BadCount++;
                 }
-                if (MapState[ShipInt] != 0)
-                {
-                    BadCount++;
-                }
+                
 
                 if (ShipInt < MapMaxIndex && ShipInt >= 0 )/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
                 {
+                    if (MapState[ShipInt] != 0)
+                    {
+                        BadCount++;
+                    }
                     MapState[ShipInt] = 2;
                     HitShips[HitShipsIndex].Add(ShipInt);
 
@@ -457,6 +463,205 @@ namespace ConsoleApp1
 
 
 
+
+
+        }
+        public void Shoot(Lod Input)
+        {
+            if (Rotate != RotationState.Unset)
+            {
+                Input.ShipRotate(Rotate);
+            }
+            List<int> MapShipShoot = new List<int>();
+            Console.WriteLine("pokládáš: " + Input.ShipType);
+            Kurzor = Input.pivot;
+            int ShipMaxIndex = Input.ShipTiles.Count;
+            int BadCount = 0;
+            Pozice ShipTile = new Pozice();
+            int ShipInt;
+            int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);
+            AbleToPlace = true;
+            
+            for (int i = 0; i < ShipMaxIndex; i++)
+            {
+                ShipTile = Input.ShipTiles[i];
+                ShipInt = (ShipTile.PozX + Kurzor.PozX) + ((ShipTile.PozY + Kurzor.PozY) * MapSize);
+
+
+
+                if (ShipTile.PozX + Kurzor.PozX >= 0 && ShipTile.PozX + Kurzor.PozX <= MapSize - 1)
+                {
+
+                }
+                else
+                {
+                    Console.WriteLine("not able place!!!3");
+                    BadCount++;
+                }
+
+
+                if (ShipInt < MapMaxIndex && ShipInt >= 0)/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
+                {
+                    
+                    
+                    if(MapState[ShipInt] == 2)
+                    {
+                        MapShipShoot.Add(ShipInt);
+                    }
+                    MapState[ShipInt] = 3;
+
+
+                }
+                else
+                {
+                    //not able place!!!
+                    Console.WriteLine("not able place!!!2");
+                    BadCount++;
+                }
+
+
+
+
+            }
+            if (BadCount == 0 && Place == true)
+            {
+                
+                Console.WriteLine("Placing");
+                //MapState = MapStateReal.ToList();
+                for (int i = 0; i < MapShipShoot.Count(); i++)
+                {
+                    ShipInt = MapShipShoot[i];
+
+                    if (MapState[ShipInt] == 2)
+                    {
+                        MapState[ShipInt] = 4;
+                        for (int d = 0; d <= HitShips.Count; d++)
+                        {
+                            int count = 0;
+                            for (int g = 1; g <= HitShips[d].Count; g++)
+                            {
+                                if (HitShips[d][g] == ShipInt)
+                                {
+                                    HitShips[d][0]++;
+                                    if (HitShips[d][0] == HitShips[d].Count - 1)
+                                    {
+                                        for (int f = 1; f <= HitShips[d].Count; f++)
+                                        {
+                                            MapState[HitShips[d][f]] = 1;
+                                            
+
+                                        }
+                                        DestroyedShipsCount++;
+                                        HitShips[d][0] = 9999999;
+
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+
+                    
+                 }
+
+
+                MapStateReal = MapState.ToList();
+                HitShipsReal = HitShips.ToList();
+            }
+
+
+
+
+        }
+        public void Discover(Lod Input)
+        {
+            if (Rotate != RotationState.Unset)
+            {
+                Input.ShipRotate(Rotate);
+            }
+            List<int> MapShipShoot = new List<int>();
+            Kurzor = Input.pivot;
+            int ShipMaxIndex = Input.ShipTiles.Count;
+            int BadCount = 0;
+            Pozice ShipTile = new Pozice();
+            int ShipInt;
+            int KurzorInt = (Kurzor.PozX) + ((Kurzor.PozY) * MapSize);
+            AbleToPlace = true;
+
+            for (int i = 0; i < ShipMaxIndex; i++)
+            {
+                ShipTile = Input.ShipTiles[i];
+                ShipInt = (ShipTile.PozX + Kurzor.PozX) + ((ShipTile.PozY + Kurzor.PozY) * MapSize);
+
+
+
+                if (ShipTile.PozX + Kurzor.PozX >= 0 && ShipTile.PozX + Kurzor.PozX <= MapSize - 1)
+                {
+
+                }
+                else
+                {
+                    Console.WriteLine("not able place!!!3");
+                    BadCount++;
+                }
+
+
+                if (ShipInt < MapMaxIndex && ShipInt >= 0)/*&& MapSize * (b - 1) <= ShipInt && MapSize * b >= ShipInt*/
+                {
+
+
+                    if (MapState[ShipInt] == 2)
+                    {
+                        MapShipShoot.Add(ShipInt);
+                    }
+                    MapState[ShipInt] = 3;
+
+
+                }
+                else
+                {
+                    //not able place!!!
+                    Console.WriteLine("not able place!!!2");
+                    BadCount++;
+                }
+
+
+
+
+            }
+            if (BadCount == 0 && Place == true)
+            {
+
+                for (int i = 0; i < MapShipShoot.Count(); i++)
+                {
+                    ShipInt = MapShipShoot[i];
+
+                    if (MapState[ShipInt] == 2)
+                    {
+                        MapStatePlayer[ShipInt] = 2;
+                        
+                    }
+
+
+                }
+
+
+                MapStateReal = MapState.ToList();
+                HitShipsReal = HitShips.ToList();
+
+
+            }
+        }
+        public bool DestroyedShips()
+        {
+            if(HitShipsIndex == DestroyedShipsCount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
 
         }
